@@ -17,6 +17,7 @@ export function Conversation() {
   const [showFireSplash, setShowFireSplash] = useState(false);
   const [transcript, setTranscript] = useState<TranscriptMessage[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [emojiIndex, setEmojiIndex] = useState(0);
 
   const conversation = useConversation({
     onConnect: () => {
@@ -37,7 +38,6 @@ export function Conversation() {
           timestamp: Date.now(),
         };
         setTranscript(prev => [...prev, newMessage]);
-        setShowFireSplash(true);
       }
     },
     onError: (error) => {
@@ -69,6 +69,22 @@ export function Conversation() {
     await conversation.endSession();
   }, [conversation]);
 
+  // Show emoji splash every 10 seconds during connected state
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (conversation.status === 'connected') {
+      interval = setInterval(() => {
+        setShowFireSplash(true);
+        setEmojiIndex(prev => (prev + 1) % 2); // Alternate between 0 and 1
+      }, 10000); // 10 seconds
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [conversation.status]);
+
   const getStatusIcon = () => {
     if (conversation.status === 'connecting') return '📞';
     if (conversation.status === 'connected' && !conversation.isSpeaking) return '🎤';
@@ -95,9 +111,10 @@ export function Conversation() {
       <div className="absolute inset-0 bg-checkerboard opacity-5" />
       <div className="absolute inset-0 bg-dots opacity-10" />
       
-      {/* Fire splash effect */}
+      {/* Emoji splash effect */}
       <FireSplash 
         trigger={showFireSplash} 
+        emojiIndex={emojiIndex}
         onComplete={() => setShowFireSplash(false)} 
       />
 
