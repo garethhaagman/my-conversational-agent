@@ -11,7 +11,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // 8-bit roasting color palette
+        // 8-bit light mode roasting color palette
         'bg-primary': "var(--bg-primary)",
         'bg-secondary': "var(--bg-secondary)",
         'text-primary': "var(--text-primary)",
@@ -21,6 +21,7 @@ export default {
         'burn-red': "var(--burn-red)",
         'ember-orange': "var(--ember-orange)",
         'disabled-gray': "var(--disabled-gray)",
+        'border-color': "var(--border-color)",
         // Legacy aliases
         'electric-blue': "var(--fire-red)",
         'hot-magenta': "var(--flame-orange)",
@@ -33,6 +34,8 @@ export default {
         '16bit': '16px',
         '24bit': '24px',
         '32bit': '32px',
+        '48bit': '48px',
+        '64bit': '64px',
       },
       fontSize: {
         '8bit': ['14px', '1.4'],

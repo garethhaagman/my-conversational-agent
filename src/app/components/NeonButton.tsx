@@ -20,11 +20,11 @@ export function NeonButton({
   className = '',
   animate = false
 }: PixelButtonProps) {
-  const baseClasses = 'px-16bit py-8bit font-8bit text-8bit-lg font-bold uppercase tracking-wider border-2 border-text-primary relative overflow-hidden bg-electric-blue text-text-primary cursor-pointer select-none';
+  const baseClasses = 'px-16bit py-8bit font-8bit text-8bit-lg font-bold uppercase tracking-wider border-2 border-border-color relative overflow-hidden bg-electric-blue text-bg-secondary cursor-pointer select-none';
   
   const variantClasses = {
-    primary: 'bg-fire-red hover:bg-flame-orange shadow-8bit border-text-primary',
-    danger: 'bg-flame-orange hover:bg-fire-red shadow-8bit border-text-primary',
+    primary: 'bg-fire-red hover:bg-flame-orange shadow-8bit border-border-color',
+    danger: 'bg-flame-orange hover:bg-fire-red shadow-8bit border-border-color',
   };
 
   const disabledClasses = 'bg-disabled-gray cursor-not-allowed hover:bg-disabled-gray opacity-50';
@@ -33,9 +33,9 @@ export function NeonButton({
 
   const pulseAnimation = {
     boxShadow: animate ? [
-      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary)',
-      '0 0 0 2px var(--fire-red), 0 0 0 3px var(--text-primary)',
-      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary)',
+      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--border-color)',
+      '0 0 0 2px var(--fire-red), 0 0 0 3px var(--border-color)',
+      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--border-color)',
     ] : undefined,
   };
 

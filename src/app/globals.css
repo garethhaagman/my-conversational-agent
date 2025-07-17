@@ -5,16 +5,17 @@
 @tailwind utilities;
 
 :root {
-  /* 8-bit Roasting Color Palette */
-  --bg-primary: #1a0a00;
-  --bg-secondary: #000000;
-  --text-primary: #ffffff;
-  --fire-red: #ff3300;
-  --flame-orange: #ff6600;
-  --golden-yellow: #ffff00;
-  --burn-red: #cc0000;
-  --ember-orange: #ff9900;
-  --disabled-gray: #808080;
+  /* 8-bit Light Mode Roasting Color Palette */
+  --bg-primary: #f8f6f0;
+  --bg-secondary: #ffffff;
+  --text-primary: #2c1810;
+  --fire-red: #d62d00;
+  --flame-orange: #e55100;
+  --golden-yellow: #f57c00;
+  --burn-red: #b71c1c;
+  --ember-orange: #ef6c00;
+  --disabled-gray: #757575;
+  --border-color: #8d6e63;
   
   /* Legacy variables for compatibility */
   --background: var(--bg-primary);
@@ -107,41 +108,41 @@ body {
 
 /* 8-bit Border and Shadow Utilities */
 .border-8bit {
-  border: 2px solid var(--text-primary);
+  border: 2px solid var(--border-color);
   border-radius: 0;
 }
 
 .border-8bit-thick {
-  border: 4px solid var(--text-primary);
+  border: 4px solid var(--border-color);
   border-radius: 0;
 }
 
 .shadow-8bit {
-  box-shadow: 2px 2px 0 var(--bg-secondary);
+  box-shadow: 2px 2px 0 var(--disabled-gray);
 }
 
 .shadow-8bit-large {
-  box-shadow: 4px 4px 0 var(--bg-secondary);
+  box-shadow: 4px 4px 0 var(--disabled-gray);
 }
 
 .glow-8bit-red {
-  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
+  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--border-color);
 }
 
 .glow-8bit-orange {
-  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--text-primary);
+  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--border-color);
 }
 
 .glow-8bit-yellow {
-  box-shadow: 0 0 0 1px var(--golden-yellow), 0 0 0 2px var(--text-primary);
+  box-shadow: 0 0 0 1px var(--golden-yellow), 0 0 0 2px var(--border-color);
 }
 
 .glow-8bit-blue {
-  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
+  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--border-color);
 }
 
 .glow-8bit-magenta {
-  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--text-primary);
+  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--border-color);
 }
 
 /* 8-bit Background Patterns */
@@ -155,16 +156,16 @@ body {
 
 .bg-checkerboard {
   background-image: 
-    linear-gradient(45deg, var(--bg-secondary) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--bg-secondary) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--bg-secondary) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--bg-secondary) 75%);
+    linear-gradient(45deg, var(--disabled-gray) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--disabled-gray) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--disabled-gray) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--disabled-gray) 75%);
   background-size: 8px 8px;
   background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
 }
 
 .bg-dots {
-  background-image: radial-gradient(circle, var(--text-primary) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
   background-size: 8px 8px;
 }
 
@@ -179,10 +180,10 @@ input:focus-visible {
 /* 8-bit Animations */
 @keyframes pulse-8bit {
   0%, 100% {
-    box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
+    box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--border-color);
   }
   50% {
-    box-shadow: 0 0 0 2px var(--fire-red), 0 0 0 3px var(--text-primary);
+    box-shadow: 0 0 0 2px var(--fire-red), 0 0 0 3px var(--border-color);
   }
 }
 
@@ -220,23 +221,23 @@ input:focus-visible {
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 8px 16px;
-  border: 2px solid var(--text-primary);
+  border: 2px solid var(--border-color);
   background: var(--fire-red);
-  color: var(--text-primary);
+  color: var(--bg-secondary);
   cursor: pointer;
   transition: none;
-  box-shadow: 2px 2px 0 var(--bg-secondary);
+  box-shadow: 2px 2px 0 var(--disabled-gray);
 }
 
 .btn-8bit:hover {
   background: var(--flame-orange);
   transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--bg-secondary);
+  box-shadow: 1px 1px 0 var(--disabled-gray);
 }
 
 .btn-8bit:active {
   transform: translate(2px, 2px);
-  box-shadow: 0 0 0 var(--bg-secondary);
+  box-shadow: 0 0 0 var(--disabled-gray);
 }
 
 .btn-8bit:disabled {
@@ -247,8 +248,8 @@ input:focus-visible {
     45deg,
     transparent,
     transparent 2px,
-    var(--bg-secondary) 2px,
-    var(--bg-secondary) 4px
+    var(--bg-primary) 2px,
+    var(--bg-primary) 4px
   );
 }
 
@@ -257,7 +258,7 @@ input:focus-visible {
   font-family: 'Courier Prime', monospace;
   font-size: 14px;
   padding: 8px 12px;
-  border: 2px solid var(--text-primary);
+  border: 2px solid var(--border-color);
   background: var(--bg-secondary);
   color: var(--text-primary);
   box-shadow: inset 1px 1px 0 var(--disabled-gray);
@@ -289,8 +290,25 @@ input:focus-visible {
 /* 8-bit Circle */
 .circle-8bit {
   clip-path: polygon(
-    30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%
+    25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%
   );
+  position: relative;
+}
+
+.circle-8bit::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--bg-secondary);
+  clip-path: polygon(
+    25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%
+  );
+  z-index: 1;
+}
+
+.circle-8bit > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* 8-bit Grid System */

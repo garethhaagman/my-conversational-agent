@@ -86,10 +86,10 @@ export function Conversation() {
   }, [conversation.status]);
 
   const getStatusIcon = () => {
-    if (conversation.status === 'connecting') return '📞';
+    if (conversation.status === 'connecting') return '🍗';
     if (conversation.status === 'connected' && !conversation.isSpeaking) return '🎤';
     if (conversation.status === 'connected' && conversation.isSpeaking) return '🔊';
-    return '📱';
+    return '🍗';
   };
 
   const getStatusText = () => {
@@ -118,39 +118,39 @@ export function Conversation() {
         onComplete={() => setShowFireSplash(false)} 
       />
 
-      <div className="relative z-10 text-center max-w-2xl mx-auto px-16bit">
+      <div className="relative z-10 text-center w-full max-w-6xl mx-auto px-32bit py-32bit">
         {/* Header */}
-        <div className="mb-32bit">
-          <h1 className="font-display text-8bit-xl md:text-6xl text-fire-red mb-16bit animate-pulse-8bit border-8bit-thick bg-bg-secondary p-16bit shadow-8bit-lg">
+        <div className="mb-24bit">
+          <h1 className="font-display text-4xl md:text-8xl text-fire-red mb-24bit animate-pulse-8bit border-8bit-thick bg-bg-secondary p-24bit shadow-8bit-lg">
             1-800 ROAST
           </h1>
-          <p className="text-8bit-lg text-text-primary font-8bit-bold">
+          <p className="text-2xl md:text-4xl text-text-primary font-8bit-bold">
             A HOTLINE FOR BRUTAL (BUT LOVING) TECH SNARK
           </p>
         </div>
 
         {/* Status indicator - 8-bit circle */}
         <div className="mb-24bit">
-          <div className="mx-auto w-48 h-48 bg-bg-secondary border-8bit-thick shadow-8bit-lg flex flex-col items-center justify-center relative circle-8bit">
-            <span className="text-6xl mb-8bit">{getStatusIcon()}</span>
-            <span className="font-8bit-bold text-8bit-lg uppercase text-center">{getStatusText()}</span>
+          <div className="mx-auto w-[60vw] h-[60vw] max-w-[60vh] max-h-[60vh] bg-fire-red border-8bit-thick shadow-8bit-lg flex flex-col items-center justify-center relative circle-8bit animate-pulse-8bit">
+            <span className="text-8xl md:text-[10rem] mb-24bit pixelated">{getStatusIcon()}</span>
+            <span className="font-8bit-bold text-2xl md:text-5xl uppercase text-center text-text-primary leading-tight">{getStatusText()}</span>
           </div>
         </div>
 
         {/* Error display */}
         {error && (
-          <div className="mb-16bit p-16bit bg-burn-red border-8bit-thick text-center shadow-8bit animate-shake-8bit">
-            <p className="text-text-primary font-8bit-bold uppercase">{error}</p>
+          <div className="mb-24bit p-24bit bg-burn-red border-8bit-thick text-center shadow-8bit animate-shake-8bit">
+            <p className="text-text-primary font-8bit-bold uppercase text-xl md:text-3xl">{error}</p>
           </div>
         )}
 
         {/* Control buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-16bit mb-32bit">
+        <div className="flex flex-col sm:flex-row justify-center gap-24bit">
           <NeonButton
             onClick={startConversation}
             disabled={conversation.status === 'connecting' || conversation.status === 'connected'}
             animate={conversation.status === 'disconnected' || conversation.status === 'idle'}
-            className="text-8bit-xl px-24bit py-24bit"
+            className="text-2xl md:text-4xl px-32bit py-32bit"
           >
             {conversation.status === 'connecting' ? 'Dialling...' : 'Start Roasting'}
           </NeonButton>
@@ -159,7 +159,7 @@ export function Conversation() {
             variant="danger"
             onClick={stopConversation}
             disabled={conversation.status !== 'connected'}
-            className="text-8bit-xl px-24bit py-24bit"
+            className="text-2xl md:text-4xl px-32bit py-32bit"
           >
             Hang Up
           </NeonButton>
