@@ -4,7 +4,6 @@ import { useConversation } from '@elevenlabs/react';
 import { useCallback } from 'react';
 import { NeonButton } from './NeonButton';
 import { FireSplash } from './FireSplash';
-import { Transcript } from './Transcript';
 import { useState, useEffect } from 'react';
 
 export interface TranscriptMessage {
@@ -91,11 +90,10 @@ export function Conversation() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(57,255,20,0.03),transparent)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,55,255,0.03),transparent)] pointer-events-none" />
+    <main className="min-h-screen bg-bg-primary text-text-primary relative overflow-hidden flex items-center justify-center">
+      {/* 8-bit Background Pattern */}
+      <div className="absolute inset-0 bg-checkerboard opacity-5" />
+      <div className="absolute inset-0 bg-dots opacity-10" />
       
       {/* Fire splash effect */}
       <FireSplash 
@@ -103,39 +101,39 @@ export function Conversation() {
         onComplete={() => setShowFireSplash(false)} 
       />
 
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+      <div className="relative z-10 text-center max-w-2xl mx-auto px-16bit">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="font-display text-6xl md:text-8xl text-[#39ff14] mb-4 animate-pulse-neon">
+        <div className="mb-32bit">
+          <h1 className="font-display text-8bit-xl md:text-6xl text-fire-red mb-16bit animate-pulse-8bit border-8bit-thick bg-bg-secondary p-16bit shadow-8bit-lg">
             1-800 ROAST
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-mono">
-            A hotline for brutal (but loving) tech snark
+          <p className="text-8bit-lg text-text-primary font-8bit-bold">
+            A HOTLINE FOR BRUTAL (BUT LOVING) TECH SNARK
           </p>
         </div>
 
-        {/* Status indicator */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gray-900/50 border border-gray-700">
-            <span className="text-2xl">{getStatusIcon()}</span>
-            <span className="font-mono text-sm">{getStatusText()}</span>
+        {/* Status indicator - 8-bit circle */}
+        <div className="mb-24bit">
+          <div className="mx-auto w-48 h-48 bg-bg-secondary border-8bit-thick shadow-8bit-lg flex flex-col items-center justify-center relative circle-8bit">
+            <span className="text-6xl mb-8bit">{getStatusIcon()}</span>
+            <span className="font-8bit-bold text-8bit-lg uppercase text-center">{getStatusText()}</span>
           </div>
         </div>
 
         {/* Error display */}
         {error && (
-          <div className="mb-8 p-4 bg-red-900/20 border border-red-500 rounded-lg text-center">
-            <p className="text-red-400 font-mono">{error}</p>
+          <div className="mb-16bit p-16bit bg-burn-red border-8bit-thick text-center shadow-8bit animate-shake-8bit">
+            <p className="text-text-primary font-8bit-bold uppercase">{error}</p>
           </div>
         )}
 
         {/* Control buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row justify-center gap-16bit mb-32bit">
           <NeonButton
             onClick={startConversation}
             disabled={conversation.status === 'connecting' || conversation.status === 'connected'}
             animate={conversation.status === 'disconnected' || conversation.status === 'idle'}
-            className="text-xl px-12 py-6"
+            className="text-8bit-xl px-24bit py-24bit"
           >
             {conversation.status === 'connecting' ? 'Dialling...' : 'Start Roasting'}
           </NeonButton>
@@ -144,39 +142,12 @@ export function Conversation() {
             variant="danger"
             onClick={stopConversation}
             disabled={conversation.status !== 'connected'}
-            className="text-xl px-12 py-6"
+            className="text-8bit-xl px-24bit py-24bit"
           >
             Hang Up
           </NeonButton>
         </div>
 
-        {/* Transcript */}
-        <Transcript messages={transcript} />
-
-        {/* Instructions */}
-        <div className="mt-12 text-center">
-          <div className="max-w-2xl mx-auto p-6 bg-gray-900/30 rounded-lg border border-gray-700">
-            <h3 className="text-[#39ff14] font-mono text-lg mb-4">How it works:</h3>
-            <ol className="text-left space-y-2 text-gray-300">
-              <li className="flex items-start gap-3">
-                <span className="text-[#39ff14] font-mono">1.</span>
-                <span>Click "Start Roasting" and allow microphone access</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#39ff14] font-mono">2.</span>
-                <span>Tell the agent your name and where you work in tech</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#39ff14] font-mono">3.</span>
-                <span>Get brutally (but lovingly) roasted about your role</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#39ff14] font-mono">4.</span>
-                <span>Hang up when you've had enough burn! 🔥</span>
-              </li>
-            </ol>
-          </div>
-        </div>
       </div>
     </main>
   );

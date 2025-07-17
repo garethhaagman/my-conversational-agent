@@ -1,15 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --neon-primary: #39ff14;
-  --neon-accent: #ff37ff;
-  --fire-accent: #ff7000;
+  /* 8-bit Roasting Color Palette */
+  --bg-primary: #1a0a00;
+  --bg-secondary: #000000;
+  --text-primary: #ffffff;
+  --fire-red: #ff3300;
+  --flame-orange: #ff6600;
+  --golden-yellow: #ffff00;
+  --burn-red: #cc0000;
+  --ember-orange: #ff9900;
+  --disabled-gray: #808080;
+  
+  /* Legacy variables for compatibility */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --neon-primary: var(--fire-red);
+  --neon-accent: var(--flame-orange);
+  --fire-accent: var(--golden-yellow);
+  --electric-blue: var(--fire-red);
+  --hot-magenta: var(--flame-orange);
+  --cyan: var(--ember-orange);
+  --lime-green: var(--golden-yellow);
 }
 
 * {
@@ -19,84 +35,277 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-family: 'Courier Prime', monospace;
   overflow-x: hidden;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Pixelated class for icons and emojis */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: contrast(1.2);
 }
 
 .font-display {
-  font-family: 'Monoton', cursive;
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
-/* Custom scrollbar */
-.scrollbar-thin {
+.font-8bit {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.font-8bit-bold {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+/* 8-bit Scrollbar */
+.scrollbar-8bit {
   scrollbar-width: thin;
 }
 
-.scrollbar-thumb-neon {
-  scrollbar-color: var(--neon-primary) transparent;
+.scrollbar-8bit {
+  scrollbar-color: var(--electric-blue) var(--bg-secondary);
 }
 
-.scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
+.scrollbar-8bit::-webkit-scrollbar {
+  width: 8px;
 }
 
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
+.scrollbar-8bit::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-primary);
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: var(--neon-primary);
-  border-radius: 3px;
+.scrollbar-8bit::-webkit-scrollbar-thumb {
+  background: var(--electric-blue);
+  border: 1px solid var(--text-primary);
+  border-radius: 0;
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-accent);
+.scrollbar-8bit::-webkit-scrollbar-thumb:hover {
+  background: var(--hot-magenta);
 }
 
-/* Neon glow utilities */
-.neon-glow-primary {
-  box-shadow: 0 0 8px var(--neon-primary), 0 0 24px var(--neon-primary);
+/* 8-bit Border and Shadow Utilities */
+.border-8bit {
+  border: 2px solid var(--text-primary);
+  border-radius: 0;
 }
 
-.neon-glow-accent {
-  box-shadow: 0 0 8px var(--neon-accent), 0 0 24px var(--neon-accent);
+.border-8bit-thick {
+  border: 4px solid var(--text-primary);
+  border-radius: 0;
 }
 
-.neon-glow-fire {
-  box-shadow: 0 0 8px var(--fire-accent), 0 0 24px var(--fire-accent);
+.shadow-8bit {
+  box-shadow: 2px 2px 0 var(--bg-secondary);
 }
 
-/* Background gradient */
-.bg-gradient-radial {
-  background: radial-gradient(circle, var(--tw-gradient-stops));
+.shadow-8bit-large {
+  box-shadow: 4px 4px 0 var(--bg-secondary);
 }
 
-/* Focus styles for accessibility */
+.glow-8bit-red {
+  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
+}
+
+.glow-8bit-orange {
+  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--text-primary);
+}
+
+.glow-8bit-yellow {
+  box-shadow: 0 0 0 1px var(--golden-yellow), 0 0 0 2px var(--text-primary);
+}
+
+.glow-8bit-blue {
+  box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
+}
+
+.glow-8bit-magenta {
+  box-shadow: 0 0 0 1px var(--flame-orange), 0 0 0 2px var(--text-primary);
+}
+
+/* 8-bit Background Patterns */
+.bg-8bit-primary {
+  background: var(--bg-primary);
+}
+
+.bg-8bit-secondary {
+  background: var(--bg-secondary);
+}
+
+.bg-checkerboard {
+  background-image: 
+    linear-gradient(45deg, var(--bg-secondary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--bg-secondary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--bg-secondary) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--bg-secondary) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(circle, var(--text-primary) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* 8-bit Focus Styles */
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
+  outline: 2px solid var(--golden-yellow);
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px var(--text-primary);
 }
 
-/* Animations */
-@keyframes pulse-neon {
+/* 8-bit Animations */
+@keyframes pulse-8bit {
   0%, 100% {
-    box-shadow: 0 0 8px var(--neon-primary), 0 0 24px var(--neon-primary);
+    box-shadow: 0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary);
   }
   50% {
-    box-shadow: 0 0 16px var(--neon-primary), 0 0 32px var(--neon-primary);
+    box-shadow: 0 0 0 2px var(--fire-red), 0 0 0 3px var(--text-primary);
   }
 }
 
-.animate-pulse-neon {
-  animation: pulse-neon 2s ease-in-out infinite;
+@keyframes blink-8bit {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes shake-8bit {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.animate-pulse-8bit {
+  animation: pulse-8bit 2s ease-in-out infinite;
+}
+
+.animate-blink-8bit {
+  animation: blink-8bit 1s linear infinite;
+}
+
+.animate-shake-8bit {
+  animation: shake-8bit 0.5s ease-in-out infinite;
+}
+
+/* 8-bit Button Styles */
+.btn-8bit {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border: 2px solid var(--text-primary);
+  background: var(--fire-red);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: none;
+  box-shadow: 2px 2px 0 var(--bg-secondary);
+}
+
+.btn-8bit:hover {
+  background: var(--flame-orange);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--bg-secondary);
+}
+
+.btn-8bit:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--bg-secondary);
+}
+
+.btn-8bit:disabled {
+  background: var(--disabled-gray);
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    var(--bg-secondary) 2px,
+    var(--bg-secondary) 4px
+  );
+}
+
+/* 8-bit Input Styles */
+.input-8bit {
+  font-family: 'Courier Prime', monospace;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 2px solid var(--text-primary);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: inset 1px 1px 0 var(--disabled-gray);
+  border-radius: 0;
+}
+
+.input-8bit:focus {
+  outline: none;
+  box-shadow: inset 1px 1px 0 var(--disabled-gray), 0 0 0 1px var(--golden-yellow);
 }
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .font-display {
-    font-size: clamp(2rem, 8vw, 4rem);
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  .btn-8bit {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  .input-8bit {
+    padding: 12px 16px;
+    font-size: 16px;
   }
 }
+
+/* 8-bit Circle */
+.circle-8bit {
+  clip-path: polygon(
+    30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%
+  );
+}
+
+/* 8-bit Grid System */
+.grid-8bit {
+  display: grid;
+  gap: 8px;
+}
+
+.grid-8bit-16 {
+  display: grid;
+  gap: 16px;
+}
+
+/* 8-bit Spacing Utilities */
+.p-8bit { padding: 8px; }
+.p-8bit-16 { padding: 16px; }
+.m-8bit { margin: 8px; }
+.m-8bit-16 { margin: 16px; }

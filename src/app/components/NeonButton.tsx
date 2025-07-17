@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
-interface NeonButtonProps {
+interface PixelButtonProps {
   children: ReactNode;
   onClick?: () => void;
   variant?: 'primary' | 'danger';
@@ -19,24 +19,23 @@ export function NeonButton({
   disabled = false,
   className = '',
   animate = false
-}: NeonButtonProps) {
-  const baseClasses = 'px-8 py-4 rounded-2xl font-mono text-lg font-bold transition-all duration-300 border-2 relative overflow-hidden';
+}: PixelButtonProps) {
+  const baseClasses = 'px-16bit py-8bit font-8bit text-8bit-lg font-bold uppercase tracking-wider border-2 border-text-primary relative overflow-hidden bg-electric-blue text-text-primary cursor-pointer select-none';
   
   const variantClasses = {
-    primary: 'border-[#39ff14] text-[#39ff14] hover:text-black hover:bg-[#39ff14] shadow-[0_0_8px_#39ff14,0_0_24px_#39ff14] hover:shadow-[0_0_16px_#39ff14,0_0_32px_#39ff14]',
-    danger: 'border-[#ff37ff] text-[#ff37ff] hover:text-black hover:bg-[#ff37ff] shadow-[0_0_8px_#ff37ff,0_0_24px_#ff37ff] hover:shadow-[0_0_16px_#ff37ff,0_0_32px_#ff37ff]',
+    primary: 'bg-fire-red hover:bg-flame-orange shadow-8bit border-text-primary',
+    danger: 'bg-flame-orange hover:bg-fire-red shadow-8bit border-text-primary',
   };
 
-  const disabledClasses = 'opacity-50 cursor-not-allowed hover:text-current hover:bg-transparent hover:shadow-current';
+  const disabledClasses = 'bg-disabled-gray cursor-not-allowed hover:bg-disabled-gray opacity-50';
 
-  const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${disabled ? disabledClasses : ''} ${className}`;
+  const buttonClasses = `${baseClasses} ${disabled ? disabledClasses : variantClasses[variant]} ${className}`;
 
   const pulseAnimation = {
-    scale: [1, 1.02, 1],
     boxShadow: animate ? [
-      `0 0 8px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}, 0 0 24px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}`,
-      `0 0 16px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}, 0 0 32px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}`,
-      `0 0 8px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}, 0 0 24px ${variant === 'primary' ? '#39ff14' : '#ff37ff'}`,
+      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary)',
+      '0 0 0 2px var(--fire-red), 0 0 0 3px var(--text-primary)',
+      '0 0 0 1px var(--fire-red), 0 0 0 2px var(--text-primary)',
     ] : undefined,
   };
 
@@ -45,26 +44,30 @@ export function NeonButton({
       className={buttonClasses}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
-      whileHover={!disabled ? { scale: 1.05 } : {}}
-      whileTap={!disabled ? { scale: 0.95 } : {}}
+      whileHover={!disabled ? { 
+        x: 1, 
+        y: 1, 
+        boxShadow: '1px 1px 0 var(--bg-secondary)'
+      } : {}}
+      whileTap={!disabled ? { 
+        x: 2, 
+        y: 2, 
+        boxShadow: '0 0 0 var(--bg-secondary)'
+      } : {}}
       animate={animate && !disabled ? pulseAnimation : {}}
       transition={{
-        duration: 2,
+        duration: animate ? 2 : 0.1,
         repeat: animate ? Infinity : 0,
-        ease: 'easeInOut',
+        ease: 'linear',
+        type: 'tween',
       }}
     >
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-        initial={{ x: '-100%' }}
-        animate={{ x: '100%' }}
-        transition={{
-          duration: 1.5,
-          repeat: animate ? Infinity : 0,
-          repeatDelay: 2,
-          ease: 'easeInOut',
-        }}
-      />
+      {disabled && (
+        <div className="absolute inset-0 bg-disabled-gray opacity-50" 
+             style={{
+               backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, var(--bg-secondary) 2px, var(--bg-secondary) 4px)'
+             }} />
+      )}
       <span className="relative z-10">{children}</span>
     </motion.button>
   );

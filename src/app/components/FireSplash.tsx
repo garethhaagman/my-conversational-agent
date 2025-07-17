@@ -3,12 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-interface FireSplashProps {
+interface PixelSplashProps {
   trigger: boolean;
   onComplete?: () => void;
 }
 
-export function FireSplash({ trigger, onComplete }: FireSplashProps) {
+export function FireSplash({ trigger, onComplete }: PixelSplashProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -30,60 +30,52 @@ export function FireSplash({ trigger, onComplete }: FireSplashProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.1, type: 'tween', ease: 'linear' }}
         >
           <motion.div
-            className="text-[#ff7000] drop-shadow-[0_0_20px_#ff7000]"
-            initial={{ scale: 0, rotate: 0 }}
+            className="text-golden-yellow glow-8bit-yellow"
+            initial={{ scale: 0 }}
             animate={{ 
-              scale: [0, 1.5, 1.2, 1.8, 1.0],
-              rotate: [0, 10, -5, 15, 0],
-              filter: [
-                'drop-shadow(0 0 20px #ff7000)',
-                'drop-shadow(0 0 40px #ff7000)',
-                'drop-shadow(0 0 60px #ff7000)',
-                'drop-shadow(0 0 40px #ff7000)',
-                'drop-shadow(0 0 20px #ff7000)',
-              ]
+              scale: [0, 2, 1.5, 2.5, 1.0],
             }}
             transition={{ 
               duration: 0.8,
-              ease: 'easeOut',
-              times: [0, 0.2, 0.4, 0.6, 1]
+              ease: 'linear',
+              type: 'tween',
+              times: [0, 0.25, 0.5, 0.75, 1]
             }}
           >
-            <div className="text-8xl md:text-9xl">🔥</div>
+            <div className="text-8xl md:text-9xl pixelated">🔥</div>
           </motion.div>
           
-          {/* Background flash */}
+          {/* 8-bit Background Flash */}
           <motion.div
-            className="absolute inset-0 bg-gradient-radial from-orange-500/20 via-red-500/10 to-transparent"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: [0, 0.6, 0], scale: [0.5, 2, 3] }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="absolute inset-0 bg-golden-yellow/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.3, 0] }}
+            transition={{ duration: 0.8, ease: 'linear', type: 'tween' }}
           />
           
-          {/* Particle effects */}
-          {[...Array(6)].map((_, i) => (
+          {/* 8-bit Pixel Effects */}
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-orange-400 rounded-full"
+              className="absolute w-8bit h-8bit bg-golden-yellow border-8bit"
               initial={{ 
                 x: 0, 
                 y: 0, 
-                scale: 0,
                 opacity: 0 
               }}
               animate={{
-                x: Math.cos(i * 60 * Math.PI / 180) * 100,
-                y: Math.sin(i * 60 * Math.PI / 180) * 100,
-                scale: [0, 1, 0],
+                x: [0, Math.cos(i * 90 * Math.PI / 180) * 80, Math.cos(i * 90 * Math.PI / 180) * 120],
+                y: [0, Math.sin(i * 90 * Math.PI / 180) * 80, Math.sin(i * 90 * Math.PI / 180) * 120],
                 opacity: [0, 1, 0]
               }}
               transition={{
-                duration: 0.8,
-                delay: 0.2,
-                ease: 'easeOut'
+                duration: 0.6,
+                delay: 0.1,
+                ease: 'linear',
+                type: 'tween'
               }}
             />
           ))}

@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { TranscriptMessage } from '../hooks/useConvai';
+import { TranscriptMessage } from './conversation';
 
 interface TranscriptProps {
   messages: TranscriptMessage[];
@@ -28,69 +28,69 @@ export function Transcript({ messages, className = '' }: TranscriptProps) {
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="border-2 border-[#39ff14] rounded-2xl bg-black/50 backdrop-blur-sm shadow-[0_0_8px_#39ff14,0_0_24px_#39ff14] p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[#39ff14] font-mono text-lg font-bold">
-            Live Transcript
+      <div className="border-8bit-thick bg-bg-secondary shadow-8bit-lg p-16bit">
+        <div className="flex items-center justify-between mb-16bit">
+          <h3 className="text-fire-red font-8bit-bold text-8bit-lg uppercase">
+            LIVE TRANSCRIPT
           </h3>
-          <div className="text-[#39ff14] text-sm opacity-70">
-            {messages.length} messages
+          <div className="text-fire-red text-8bit font-8bit-bold">
+            {messages.length} MSG
           </div>
         </div>
         
         <div 
           ref={scrollRef}
-          className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-[#39ff14] scrollbar-track-transparent"
+          className="h-64 overflow-y-auto scrollbar-8bit bg-bg-primary border-8bit p-8bit"
         >
           <AnimatePresence initial={false}>
             {messages.length === 0 ? (
-              <div className="text-center text-gray-500 py-8">
-                <div className="text-4xl mb-2">🎙️</div>
-                <p className="text-sm">Conversation will appear here...</p>
+              <div className="text-center text-disabled-gray py-16bit">
+                <div className="text-8bit-xl mb-8bit">🎙️</div>
+                <p className="text-8bit font-8bit uppercase">CONVERSATION WILL APPEAR HERE...</p>
               </div>
             ) : (
               messages.map((message, index) => (
                 <motion.div
                   key={message.id}
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className={`mb-3 p-3 rounded-lg ${
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, type: 'tween', ease: 'linear' }}
+                  className={`mb-8bit p-8bit border-8bit shadow-8bit ${
                     message.speaker === 'user' 
-                      ? 'bg-[#39ff14]/10 border-l-4 border-[#39ff14]' 
-                      : 'bg-[#ff37ff]/10 border-l-4 border-[#ff37ff]'
+                      ? 'bg-fire-red/20 border-l-8bit border-fire-red' 
+                      : 'bg-flame-orange/20 border-l-8bit border-flame-orange'
                   }`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-8bit">
                     <div className="flex-shrink-0">
                       {message.speaker === 'user' ? (
-                        <div className="w-6 h-6 bg-[#39ff14] rounded-full flex items-center justify-center text-black text-xs font-bold">
+                        <div className="w-16bit h-16bit bg-fire-red border-8bit flex items-center justify-center text-bg-primary text-8bit font-8bit-bold">
                           U
                         </div>
                       ) : (
-                        <div className="w-6 h-6 bg-[#ff37ff] rounded-full flex items-center justify-center text-black text-xs font-bold">
+                        <div className="w-16bit h-16bit bg-flame-orange border-8bit flex items-center justify-center text-bg-primary text-8bit font-8bit-bold">
                           A
                         </div>
                       )}
                     </div>
                     
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className={`text-xs font-mono font-bold ${
-                          message.speaker === 'user' ? 'text-[#39ff14]' : 'text-[#ff37ff]'
+                      <div className="flex items-center gap-8bit mb-8bit">
+                        <span className={`text-8bit font-8bit-bold uppercase ${
+                          message.speaker === 'user' ? 'text-fire-red' : 'text-flame-orange'
                         }`}>
-                          {message.speaker === 'user' ? 'You' : 'Agent'}
+                          {message.speaker === 'user' ? 'YOU' : 'AGENT'}
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-8bit text-disabled-gray font-8bit">
                           {formatTime(message.timestamp)}
                         </span>
                       </div>
                       
                       <motion.p 
-                        className="text-white text-sm leading-relaxed font-mono"
+                        className="text-text-primary text-8bit font-8bit leading-relaxed"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.3, type: 'tween' }}
                       >
                         {message.text}
                       </motion.p>
