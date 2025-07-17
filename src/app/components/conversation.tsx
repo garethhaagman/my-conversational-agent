@@ -4,6 +4,7 @@ import { useConversation } from '@elevenlabs/react';
 import { useCallback } from 'react';
 import { NeonButton } from './NeonButton';
 import { FireSplash } from './FireSplash';
+import { Waveform } from './Waveform';
 import { useState, useEffect } from 'react';
 
 export interface TranscriptMessage {
@@ -88,7 +89,7 @@ export function Conversation() {
   const getStatusIcon = () => {
     if (conversation.status === 'connecting') return '🍗';
     if (conversation.status === 'connected' && !conversation.isSpeaking) return '🎤';
-    if (conversation.status === 'connected' && conversation.isSpeaking) return '🔊';
+    if (conversation.status === 'connected' && conversation.isSpeaking) return 'waveform';
     return '🍗';
   };
 
@@ -122,7 +123,7 @@ export function Conversation() {
         {/* Header */}
         <div className="mb-24bit">
           <h1 className="font-display text-4xl md:text-8xl text-fire-red mb-24bit animate-pulse-8bit border-8bit-thick bg-bg-secondary p-24bit shadow-8bit-lg">
-            1-800 ROAST
+            1-800 ROAST ME
           </h1>
           <p className="text-2xl md:text-4xl text-text-primary font-8bit-bold">
             A HOTLINE FOR BRUTAL (BUT LOVING) TECH SNARK
@@ -132,7 +133,13 @@ export function Conversation() {
         {/* Status indicator - 8-bit circle */}
         <div className="mb-24bit">
           <div className="mx-auto w-[60vw] h-[60vw] max-w-[60vh] max-h-[60vh] bg-fire-red border-8bit-thick shadow-8bit-lg flex flex-col items-center justify-center relative circle-8bit animate-pulse-8bit">
-            <span className="text-8xl md:text-[10rem] mb-24bit pixelated">{getStatusIcon()}</span>
+            <div className="mb-24bit">
+              {getStatusIcon() === 'waveform' ? (
+                <Waveform isActive={conversation.isSpeaking} size="large" />
+              ) : (
+                <span className="text-8xl md:text-[10rem] pixelated">{getStatusIcon()}</span>
+              )}
+            </div>
             <span className="font-8bit-bold text-2xl md:text-5xl uppercase text-center text-text-primary leading-tight">{getStatusText()}</span>
           </div>
         </div>

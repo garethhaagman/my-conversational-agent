@@ -47,12 +47,12 @@ export function NeonButton({
       whileHover={!disabled ? { 
         x: 1, 
         y: 1, 
-        boxShadow: '1px 1px 0 var(--bg-secondary)'
+        boxShadow: '1px 1px 0 var(--disabled-gray)'
       } : {}}
       whileTap={!disabled ? { 
         x: 2, 
         y: 2, 
-        boxShadow: '0 0 0 var(--bg-secondary)'
+        boxShadow: '0 0 0 var(--disabled-gray)'
       } : {}}
       animate={animate && !disabled ? pulseAnimation : {}}
       transition={{
@@ -65,7 +65,7 @@ export function NeonButton({
       {disabled && (
         <div className="absolute inset-0 bg-disabled-gray opacity-50" 
              style={{
-               backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, var(--bg-secondary) 2px, var(--bg-secondary) 4px)'
+               backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, var(--bg-primary) 2px, var(--bg-primary) 4px)'
              }} />
       )}
       <span className="relative z-10">{children}</span>
