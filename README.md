@@ -1,36 +1,174 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 1-800 ROAST 🔥
 
-## Getting Started
+**A hotline for brutal (but loving) tech snark**
 
-First, run the development server:
+A Next.js hackathon project that creates a neon-themed web application where tech workers can call in and get roasted about their jobs by an AI agent powered by ElevenLabs Conversational AI.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- 🎙️ **Real-time Voice Conversations**: WebSocket-based audio streaming with ElevenLabs
+- 🔥 **Fire Animations**: Visual feedback when the AI delivers roasts
+- 💚 **Neon Cyberpunk Theme**: Custom neon green and magenta styling
+- 📱 **Mobile-First Design**: Responsive layout that works on all devices
+- 📝 **Live Transcript**: Real-time display of conversation messages
+- 🎨 **Smooth Animations**: Framer Motion-powered interactions
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- ElevenLabs API key and Agent ID
+- A modern web browser with microphone support
+
+### Installation
+
+1. **Clone and install dependencies**:
+   ```bash
+   git clone <repository-url>
+   cd my-conversational-agent
+   npm install
+   ```
+
+2. **Set up environment variables**:
+   ```bash
+   cp .env.local.example .env.local
+   ```
+   
+   Edit `.env.local` and add your ElevenLabs credentials:
+   ```
+   ELEVENLABS_API_KEY=your_api_key_here
+   AGENT_ID=your_agent_id_here
+   ```
+
+3. **Create your ElevenLabs agent**:
+   - Go to [ElevenLabs Dashboard](https://elevenlabs.io/app/conversational-ai)
+   - Create a new Conversational AI agent
+   - Use this system prompt:
+     ```
+     You are "1-800 Roast"—the snarkiest tech-industry insult comic.
+     RULES:
+     1. Open with a short friendly greeting, then ask:
+        "What's your name, and where do you waste your talents?"
+     2. After user answers, craft a roast that:
+        • references their name and role OR company,
+        • uses insider tech humour (funding rounds, agile stand-ups, server downtime, AI hype, etc.),
+        • stays PG-13, witty, never hateful or discriminatory.
+     3. Keep each roast ≤40 words.
+     4. End every roast with a 1-word mic-drop sound-effect (e.g., "Boom!").
+     5. Wait for user to say "Stop" or click Hang-Up; otherwise prompt "Need another burn?"
+     ```
+   - Choose "Eleven Flash v2.5" model for low latency
+   - Copy the Agent ID to your `.env.local`
+
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in browser**:
+   Visit `http://localhost:3000` and start getting roasted!
+
+## How It Works
+
+1. **Click "Start Roasting"** - The app requests microphone permission and connects to ElevenLabs
+2. **Tell your story** - The AI agent asks for your name and tech role
+3. **Get roasted** - Receive a personalized, witty roast about your job
+4. **Enjoy the show** - Watch the fire animations and neon effects
+5. **Hang up** - End the conversation when you've had enough burn
+
+## Architecture
+
+Built with modern web technologies:
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type safety and better developer experience
+- **Tailwind CSS** - Utility-first styling with custom neon theme
+- **Framer Motion** - Smooth animations and transitions
+- **ElevenLabs Conversational AI** - Real-time voice streaming
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── NeonButton.tsx      # Animated neon button
+│   │   ├── FireSplash.tsx      # Fire emoji animation
+│   │   └── Transcript.tsx      # Conversation display
+│   ├── hooks/
+│   │   └── useConvai.ts        # WebSocket communication
+│   ├── api/
+│   │   └── convai/route.ts     # ElevenLabs API proxy
+│   ├── page.tsx                # Main application
+│   └── globals.css             # Neon theme styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Styling
+- Colors are defined in CSS variables in `globals.css`
+- Neon effects use custom Tailwind utilities
+- Animations can be customized in component files
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### AI Behavior
+- Modify the system prompt in your ElevenLabs agent
+- Adjust response length and tone
+- Add more specific industry knowledge
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+### Vercel (Recommended)
+```bash
+npm install -g vercel
+vercel
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Add environment variables in Vercel dashboard:
+- `ELEVENLABS_API_KEY`
+- `AGENT_ID`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Other Platforms
+The app works on any platform that supports:
+- Node.js 18+
+- Environment variables
+- WebSocket connections
 
-## Deploy on Vercel
+## Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Available Scripts
+- `npm run dev` - Development server with Turbopack
+- `npm run build` - Production build
+- `npm run start` - Production server
+- `npm run lint` - ESLint code quality check
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run linting and tests
+5. Submit a pull request
+
+## Future Enhancements
+
+The codebase is designed to be easily extensible:
+
+- **Web Search Integration** - Add real-time context via ElevenLabs
+- **Voice Cloning** - Let users get roasted in their own voice
+- **Social Sharing** - Share roast clips on social media
+- **Leaderboards** - Track the best roasts
+- **Slack Integration** - Roast entire teams in Slack channels
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+- Built for the ElevenLabs hackathon
+- Inspired by classic tech comedy and roast culture
+- Powered by ElevenLabs Conversational AI technology
+
+---
+
+**Ready to get roasted?** 🔥 Fire up the app and let the AI tell you what's really wrong with your tech career!
